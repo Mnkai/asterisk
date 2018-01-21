@@ -90,32 +90,32 @@ def merge_codec_value(key=None, val=None, section=None, pjsip=None,
         return _merge_codec_value
 
     if key == 'allow':
-	    try:
-		disallow = sip.get(section, 'disallow')[0]
-		if disallow == 'all':
-		    #don't inherit
+            try:
+                disallow = sip.get(section, 'disallow')[0]
+                if disallow == 'all':
+                    #don't inherit
                     for i in sip.get(section, 'allow'):
-		        set_value(key, i, section, pjsip, nmapped, type)
-	        else:
-		    merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
-	    except LookupError:
-	        print "lookup error"
-		merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
-		return
+                        set_value(key, i, section, pjsip, nmapped, type)
+                else:
+                    merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
+            except LookupError:
+                print "lookup error"
+                merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
+                return
     elif key == 'disallow':
-	    try:
-		allow = sip.get(section, 'allow')[0]
-		if allow == 'all':
-		    #don't inherit
+            try:
+                allow = sip.get(section, 'allow')[0]
+                if allow == 'all':
+                    #don't inherit
                     for i in sip.get(section, 'disallow'):
-		        set_value(key, i, section, pjsip, nmapped, type)
-	        else:
-		    merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
-	    except LookupError:
-		merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
-		return
+                        set_value(key, i, section, pjsip, nmapped, type)
+                else:
+                    merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
+            except LookupError:
+                merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
+                return
     else:
-	merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
+        merge_value(key, val, section, pjsip, nmapped, type, section_to, key_to)
 
 
 def non_mapped(nmapped):
@@ -164,7 +164,7 @@ def setup_udptl(section, pjsip, nmapped):
         try:
              val = sip.get('general', 't38pt_udptl')[0]
         except LookupError:
-	     return
+             return
 
     ec = 'none'
     if 'yes' in val:
